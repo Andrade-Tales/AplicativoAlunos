@@ -13,8 +13,11 @@
         android:theme="@style/Theme.ListaDeAlunos"
         tools:targetApi="31">
         <activity
-            android:name="com.app.AplicativoAlunos.MainActivity"
-            android:exported="true">
+            android:name="com.app.AplicativoAlunos.ui.Activity.FormularioAlunoActivity"
+            android:exported="false"/>
+        <activity
+            android:name="com.app.AplicativoAlunos.ui.Activity.ListaAlunosActivity"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
