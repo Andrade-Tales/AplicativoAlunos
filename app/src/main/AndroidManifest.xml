@@ -13,10 +13,7 @@
         android:theme="@style/Theme.ListaDeAlunos"
         tools:targetApi="31">
         <activity
-            android:name="com.app.AplicativoAlunos.ui.Activity.FormularioAlunoActivity"
-            android:exported="false"/>
-        <activity
-            android:name="com.app.AplicativoAlunos.ui.Activity.ListaAlunosActivity"
+            android:name="com.app.aplicativoalunos.ui.activity.ListaAlunosActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,6 +21,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.app.aplicativoalunos.ui.activity.FormularioAlunoActivity"/>
     </application>
 
 </manifest>

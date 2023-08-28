@@ -1,4 +1,4 @@
-package com.app.AplicativoAlunos;
+package com.app.aplicativoalunos;
 
 import org.junit.Test;
 
