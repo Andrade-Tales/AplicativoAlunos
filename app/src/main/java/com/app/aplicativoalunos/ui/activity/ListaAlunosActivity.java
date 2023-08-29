@@ -68,16 +68,20 @@ public class ListaAlunosActivity extends AppCompatActivity {
     private void configuraLista() {
         // Componente ListView (capacidade de compor outras views)
         ListView listaDeAlunos = findViewById(R.id.activity_lista_alunos_listview);
-
         // Usando o adapter (vínculo dos dados com base em uma view), (adapter views)
         listaDeAlunos.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, dao.todos()));
 
-        // Adicionando Listener
-        // Exibição de mensagem com Log
+        final List<Aluno> alunos = dao.todos();
         listaDeAlunos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            // Adicionando Listener
+            // Exibição de mensagem com Log
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int posicao, long id) {
-                Log.i("Posição do aluno", "" + posicao);
+                Aluno alunoEscolhido = alunos.get(posicao);
+                Intent vaiParaFormularioActivity = new Intent(ListaAlunosActivity.this, FormularioAlunoActivity.class);
+                // Tranferindo dados
+                vaiParaFormularioActivity.putExtra("aluno", alunoEscolhido);
+                startActivity(vaiParaFormularioActivity);
             }
         });
     }

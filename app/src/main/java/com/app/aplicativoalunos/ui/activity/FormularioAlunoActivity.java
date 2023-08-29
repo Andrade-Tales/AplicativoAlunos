@@ -1,5 +1,6 @@
 package com.app.aplicativoalunos.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -19,31 +20,37 @@ public class FormularioAlunoActivity extends AppCompatActivity {
     private static EditText campoEmail;
     private final AlunoDao dao = new AlunoDao();
 
+    private Aluno aluno;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         // Pegando as views de maneira estática
         setContentView(R.layout.activity_formulario_aluno);
-
         setTitle(TITULO_APPBAR);
-
         inicializacaoDosCampos();
-
         configuraBotaoSalvar();
+        Intent dados = getIntent();
+        aluno = (Aluno) dados.getSerializableExtra("aluno");
+        campoNome.setText(aluno.getNome());
+        campoTelefone.setText(aluno.getTelefone());
+        campoEmail.setText(aluno.getEmail());
     }
 
     private void configuraBotaoSalvar() {
         // Criando ação de botão via setOnClickListener e usando o layout estático pelo findViewById
         Button botaoSalvar = findViewById(R.id.activity_formulario_aluno_botao_salvar);
-
         // Definindo comportamentos via evento do botão
         botaoSalvar.setOnClickListener(new View.OnClickListener() { // Exibindo Toast (mensagem)
             // classe anônima (método onClick)
             @Override
             public void onClick(View v) {
-                Aluno alunoCriado = criaAluno();
-                salva(alunoCriado);
+//                Aluno alunoCriado = criaAluno();
+//                salva(alunoCriado);
+                preencheAluno();
+                dao.edita(aluno);
+                finish();
 
             }
         });
@@ -59,19 +66,18 @@ public class FormularioAlunoActivity extends AppCompatActivity {
     // Método salva aluno
     private void salva(Aluno aluno) {
         dao.salva(aluno);
-
         // Finalizando a pilha da activity
         finish();
     }
 
     // Método cria aluno
-    @NonNull
-    private static Aluno criaAluno() {
+    private void preencheAluno() {
         String nome = campoNome.getText().toString();
         String telefone = campoTelefone.getText().toString();
         String email = campoEmail.getText().toString();
 
-        Aluno alunoCriado = new Aluno(nome, telefone, email);
-        return alunoCriado;
+        aluno.setNome(nome);
+        aluno.setTelefone(telefone);
+        aluno.setEmail(email);
     }
 }
