@@ -34,7 +34,7 @@ public class AlunoDao {
     private static Aluno buscaAlunoPorId(Aluno aluno) {
         for (Aluno a : alunos) {
             if (a.getId() == aluno.getId()) {
-            return a;
+                return a;
             }
         }
         return null;
@@ -54,4 +54,13 @@ public class AlunoDao {
 
     // Adicionando novos id's (adicionando novo aluno)
     private static int contadorDeIds = 1;
+
+    // Remove aluno
+    public void remove(Aluno aluno) {
+        Aluno alunoDevolvido = buscaAlunoPorId(aluno);
+        if (alunoDevolvido != null) {
+            alunos.remove(alunoDevolvido);
+        }
+
+    }
 }
