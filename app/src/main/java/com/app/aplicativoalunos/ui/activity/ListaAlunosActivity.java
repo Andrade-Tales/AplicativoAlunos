@@ -35,23 +35,30 @@ public class ListaAlunosActivity extends AppCompatActivity {
         setTitle(TITULO_APPBAR);
         configuraFabNovoAluno();
         configuraLista();
-
         dao.salva(new Aluno("Alex", "1122223333", "alex@alura.com.br"));
         dao.salva(new Aluno("Fran", "1122223333", "fran@gmail.com"));
+
     }
 
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
-        menu.add("Remover");
+        // inflando o layout
+        getMenuInflater()
+                .inflate(R.menu.activity_lista_alunos_menu, menu);
+
     }
 
     // Qualquer menu de contexto clickado será chamado esse método
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
-        AdapterView.AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        Aluno alunoEscolhido = adapter.getItem(menuInfo.position);
-        remove(alunoEscolhido);
+
+        int itemId = item.getItemId();
+        if (itemId == R.id.activity_lista_alunos_menu_remover) { // Filtrando por id de menu
+            AdapterView.AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+            Aluno alunoEscolhido = adapter.getItem(menuInfo.position);
+            remove(alunoEscolhido);
+        }
         return super.onContextItemSelected(item);
     }
 
